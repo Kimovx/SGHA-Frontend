@@ -1,0 +1,7 @@
+<form [formGroup]="loginFormGroup">
+  <label for="emailAddress">Email</label>
+  <input formControlName="emailAddress" id="emailAddress" type="text">
+  <label for="accountPassword">password</label>
+  <input formControlName="accountPassword" id="emailAddress" type="text">
+  <button (click)="onSubmit($event)">submit</button>
+</form>
