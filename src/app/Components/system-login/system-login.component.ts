@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginRequest } from '../../Model/LoginRequesr';
+import { firstValueFrom } from 'rxjs';
+import { AuthService } from '../../../Services/auth.service';
 
 @Component({
   selector: 'app-system-login',
@@ -12,9 +14,14 @@ import { LoginRequest } from '../../Model/LoginRequesr';
   styleUrl: './system-login.component.css'
 })
 export class SystemLoginComponent implements OnInit {
+  loginRequest: LoginRequest;
+  
   constructor(
-    private _formBuilder: FormBuilder
-  ){}
+    private _formBuilder: FormBuilder,
+    private authService: AuthService
+  ){
+    this.loginRequest = {} as LoginRequest;
+  }
 
   ngOnInit(): void {}
 
@@ -23,9 +30,13 @@ export class SystemLoginComponent implements OnInit {
     accountPassword: ['', Validators.required]
   });
 
-  onSubmit(event: Event){
+  async onSubmit(event: Event){
     event.preventDefault();
-    console.log(this.loginFormGroup.value)
+
+    this.loginRequest.emailAddress = this.loginFormGroup.get('emailAddress')?.value!;
+    this.loginRequest.accountPassword = this.loginFormGroup.get('accountPassword')?.value!;
+
+    console.log(await firstValueFrom(this.authService.loginRequest(this.loginRequest)))
   }
 
 }

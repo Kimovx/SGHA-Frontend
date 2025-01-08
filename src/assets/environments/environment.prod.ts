@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.rennto.com/api'
+  apiUrl: 'https://localhost:7034/api'
 };
