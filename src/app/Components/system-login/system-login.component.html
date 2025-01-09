@@ -74,7 +74,7 @@
           }
           <div class="w-100 d-flex justify-content-center">
             <button matRipple (click)="onSubmit($event)" class="form-btn"
-            [disabled]="loginFormGroup.invalid" [class.disable-click]="loginFormGroup.invalid" [class.w-100]="!isLoading" [class.rounded-5]="isLoading">
+            [disabled]="loginFormGroup.invalid" [class.disable-click]="loginFormGroup.invalid" [class.w-auto]="isLoading" [class.rounded-5]="isLoading">
             @if(isLoading){
               <div class="custom-loader"></div>
             }

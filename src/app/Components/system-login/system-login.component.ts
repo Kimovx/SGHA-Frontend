@@ -73,8 +73,14 @@ export class SystemLoginComponent implements OnInit {
     this.loginRequest.emailAddress = this.loginFormGroup.get('emailAddress')?.value!;
     this.loginRequest.accountPassword = this.loginFormGroup.get('accountPassword')?.value!;
 
-    const res = await firstValueFrom(this.authService.loginRequest(this.loginRequest)).then(()=> this.isLoading = false).catch(()=> this.isInvalid = true)
-    console.log(res);
+    try {
+      const res = await firstValueFrom(this.authService.loginRequest(this.loginRequest));
+      console.log(res)
+      this.isLoading = false;
+    }
+    catch {
+      this.isLoading = false;
+    }
   }
 
 }
