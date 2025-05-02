@@ -7,9 +7,10 @@ import { AuthService } from '../../../Services/auth.service';
 import {MatRippleModule} from '@angular/material/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { HousesService } from '../../../Services/houses.service';
+import { LoginResponse } from '../../../Model View/LoginRespone,';
 
 @Component({
   selector: 'app-system-login',
@@ -62,7 +63,7 @@ export class SystemLoginComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private authService: AuthService,
-    private housesSerivce: HousesService,
+    private router: Router
   ){
     this.loginRequest = {} as LoginRequest;
 
@@ -84,7 +85,6 @@ export class SystemLoginComponent implements OnInit {
   });
 
   async onSubmit(event: Event){
-    console.log(firstValueFrom(this.housesSerivce.getALlHouses()));
     event.preventDefault();
     this.isLoading = true;
 
@@ -92,8 +92,10 @@ export class SystemLoginComponent implements OnInit {
     this.loginRequest.accountPassword = this.loginFormGroup.get('accountPassword')?.value!;
 
     try {
-      const res = await firstValueFrom(this.authService.loginRequest(this.loginRequest));
-      console.log(res)
+      const res: LoginResponse = await firstValueFrom(this.authService.loginRequest(this.loginRequest));
+      if(res.roleName === 'User'){
+        this.router.navigate(['/house-owner']);
+      }
       this.isLoading = false;
     }
     catch {
