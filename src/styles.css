@@ -1,21 +1,74 @@
 body {
   background-color: #F5F5F5;
+  overflow-y: hidden;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins';
+  font-family: 'Almarai', sans-serif;
 }
 
-root {
-  --primary-color: #465FF1
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0 !important;
+}
+
+input {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  box-shadow: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.2s !important;
+  -webkit-transition: all 0.2s !important;
+  -moz-transition: all 0.2s !important;
+  -ms-transition: all 0.2s !important;
+  -o-transition: all 0.2s !important;
+}
+
+input:focus {
+  outline: none;
+}
+
+
+:root {
+  --primary-color: #4CAF50;
+  --secondary-color: #0E9D9B;
 }
 
 /* GLobal Classes */
+.text-color-prim {
+  color: var(--primary-color) !important;
+}
+
+.text-color-sec {
+  color: var(--secondary-color) !important;
+}
+
 .backg-primary {
-  background-color: #465FF1;
+  background-color: var(--primary-color) !important;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.077);
+  border-radius: 24px;
+  -webkit-border-radius: 24px;
+  -moz-border-radius: 24px;
+  -ms-border-radius: 24px;
+  -o-border-radius: 24px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .cursor-pointer {
@@ -32,7 +85,7 @@ root {
 }
 
 .disable-click {
-  opacity: 0.8;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 

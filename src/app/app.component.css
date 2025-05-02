@@ -1,0 +1,5 @@
+.image-container {
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
+  z-index: -1;
+}

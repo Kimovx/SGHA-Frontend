@@ -1,17 +1,24 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { HttpService } from './../../../Services/http.service';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginRequest } from '../../Model/LoginRequesr';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../../../Services/auth.service';
 import {MatRippleModule} from '@angular/material/core';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { HousesService } from '../../../Services/houses.service';
 
 @Component({
   selector: 'app-system-login',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    MatRippleModule
+    MatRippleModule,
+    CommonModule,
+    RouterModule
   ],
   animations: [
     trigger('heightAnimation', [
@@ -31,6 +38,15 @@ import { trigger, transition, style, animate } from '@angular/animations';
       transition(':leave', [
         animate('150ms ease-out', style({ height: '0px', width: '0px', opacity: 0 }))
       ])
+    ]),
+    trigger('fadeInAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-in', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-out', style({ opacity: 0 }))
+      ])
     ])
   ],
   templateUrl: './system-login.component.html',
@@ -45,7 +61,8 @@ export class SystemLoginComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private housesSerivce: HousesService,
   ){
     this.loginRequest = {} as LoginRequest;
 
@@ -67,6 +84,7 @@ export class SystemLoginComponent implements OnInit {
   });
 
   async onSubmit(event: Event){
+    console.log(firstValueFrom(this.housesSerivce.getALlHouses()));
     event.preventDefault();
     this.isLoading = true;
 
@@ -79,6 +97,7 @@ export class SystemLoginComponent implements OnInit {
       this.isLoading = false;
     }
     catch {
+      this.isInvalid = true;
       this.isLoading = false;
     }
   }

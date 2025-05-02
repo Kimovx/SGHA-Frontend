@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://localhost:7034/api'
+  apiUrl: 'https://greensync2025-001-site1.ntempurl.com/api'
 };
