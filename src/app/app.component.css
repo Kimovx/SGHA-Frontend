@@ -3,3 +3,7 @@
   -webkit-filter: blur(4px);
   z-index: -1;
 }
+
+.overlay {
+  z-index: -1;
+}

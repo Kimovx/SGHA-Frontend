@@ -4,7 +4,7 @@
     <img class="w-100 h-100 object-fit-cover" src="../../../assets/bg.webp" alt="Green Sync | Login Page Background Image">
   </div>
   <!-- Black Overlay -->
-  <span class="w-100 h-100 position-absolute bg-black opacity-50 z-0"></span>
+  <span class="w-100 h-100 position-absolute bg-black opacity-50 overlay"></span>
 
   <div [@routeAnimations]="prepareRoute(outlet)">
     <router-outlet #outlet="outlet"></router-outlet>
