@@ -53,6 +53,7 @@ h1 {
 
 .input-group input {
   height: 41px;
+  min-width: 221px;
 }
 
 .input-group input:focus {
