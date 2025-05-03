@@ -28,12 +28,13 @@
 }
 
 h1 {
-  width: 324.8px;
+  min-width: 324.8px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
   h1 {
-    width: 225px;
+    max-width: 225px;
+    min-width: unset;
   }
 }
 

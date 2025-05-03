@@ -22,7 +22,7 @@ input {
   outline: none;
   background: none;
   font-family: inherit;
-  font-size: inherit;
+  font-size: 16px !important;
   color: inherit;
   box-shadow: none;
   appearance: none;
