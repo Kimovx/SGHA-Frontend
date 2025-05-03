@@ -2,25 +2,31 @@
   height: fit-content !important;
 }
 
-.first-section,
-.second-section {
-  height: fit-content !important;
+.row {
+  column-gap: 59px;
 }
 
-.fourth-section .glass-effect,
-.first-section .glass-effect {
-  width: 182px;
-  height: 182px;
+section {
+  width: calc(50% - (39px / 2)) !important;
+  height: 182px !important;
+  min-width: 340px;
+  max-width: 388px;
+  padding-inline: 0px;
 }
+
+.double-section .glass-effect {
+  width: calc(50% - (39px / 2));
+}
+
+.double-section {
+  justify-content: space-between;
+}
+
 
 sup i {
   font-size: 5px;
 }
 
-.second-section .glass-effect {
-  width: 388px;
-  height: 182px;
-}
 
 .glass-effect {
   transition: 0.5s;
@@ -39,10 +45,6 @@ sup i {
   -o-transform: translateY(-5px);
 }
 
-.third-section {
-  width: 388px;
-  height: 182px;
-}
 
 .checkbox-wrapper-22 {
   height: 24px;

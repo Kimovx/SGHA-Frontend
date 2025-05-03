@@ -3,8 +3,8 @@
 /* =========================================================== */
 /* =========================================================== */
 .login-container {
-  width: 657px;
-  height: 480px;
+  max-width: 657px;
+  min-height: 480px;
   transition: all 0.2s;
   -webkit-transition: all 0.4s;
   -moz-transition: all 0.2s;
@@ -22,8 +22,19 @@
 
 .title-container .leaf-icon {
   top: -19px;
-  left: 248px;
+  left: 136px;
   animation: bounce 0.6s infinite alternate;
+  -webkit-animation: bounce 0.6s infinite alternate;
+}
+
+h1 {
+  width: 324.8px;
+}
+
+@media (max-width: 400px) {
+  h1 {
+    width: 225px;
+  }
 }
 
 @keyframes bounce {

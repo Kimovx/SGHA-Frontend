@@ -1,55 +1,33 @@
 <div
-  class="page-container vh-100 vw-100 bg-transparent d-flex flex-column align-items-center justify-content-center position-relative"
->
+  class="container-fluid page-container vh-100 vw-100 bg-transparent d-flex flex-column align-items-center justify-content-center position-relative">
   <!-- Login Container -->
-  <div
-    class="login-container z-1 glass-effect d-flex flex-column p-5 fw-bold gap-5 align-itmes-center"
-  >
-    <div
-      class="title-container position-relative d-flex justify-content-center"
-    >
-      <img
-        class="leaf-icon position-absolute"
-        src="../../../assets/Icons/leaf.svg"
-        alt="Green Sync | Leaf Icon"
-      />
-      <h1 class="fs-1 fw-bold text-center text-color-prim h-auto">
+  <div class="login-container z-1 glass-effect d-flex flex-column p-5 fw-bold gap-5 align-itmes-center">
+    <div class="title-container  d-flex justify-content-center">
+      <h1 class="fs-1 fw-bold text-center text-color-prim h-auto position-relative">
+        <img class="leaf-icon position-absolute" src="../../../assets/Icons/leaf.svg" alt="Green Sync | Leaf Icon" />
         WELCOME BACK
       </h1>
     </div>
 
     <!-- Form Container -->
-    <form
-      [formGroup]="loginFormGroup"
-      class="d-flex flex-column gap-4 align-items-center"
-    >
+    <form [formGroup]="loginFormGroup" class="d-flex flex-column gap-4 align-items-center">
       <!-- Email Input -->
       <div class="input-group d-flex flex-column gap-2 ps-1">
         <label class="d-flex gap-1 align-items-center" for="username">
           <span class="icon-container">
-            <img
-              class="form-icon"
-              src="../../../assets/Icons/email.svg"
-              alt="Green Sync | Username Icon"
-            />
+            <img class="form-icon" src="../../../assets/Icons/email.svg" alt="Green Sync | Username Icon" />
           </span>
           <span class="text-light fw-medium">Email</span>
         </label>
-        <input
-          class="bg-transparent border border-1 border-light rounded-5 p-2 text-light ps-3"
-          type="text"
-          placeholder="Enter Email"
-          formControlName="emailAddress"
-        />
+        <input class="bg-transparent border border-1 border-light rounded-5 p-2 text-light ps-3" type="text"
+          placeholder="Enter Email" formControlName="emailAddress" />
 
         @if(loginFormGroup.get('emailAddress')?.hasError('pattern') &&
         loginFormGroup.get('emailAddress')?.dirty &&
         loginFormGroup.get('emailAddress')?.touched){
         <div @heightAnimation class="small text-warning d-flex gap-1">
-          <span
-            >Please enter a valid email address in the format
-            example&#64;domain.com</span
-          >
+          <span>Please enter a valid email address in the format
+            example&#64;domain.com</span>
         </div>
         } @if(loginFormGroup.get('emailAddress')?.hasError('required') &&
         loginFormGroup.get('emailAddress')?.touched){
@@ -62,20 +40,12 @@
       <div class="input-group d-flex flex-column gap-2">
         <label class="d-flex gap-1 align-items-center ps-1" for="username">
           <span class="icon-container">
-            <img
-              class="form-icon"
-              src="../../../assets/Icons/password-login.svg"
-              alt="Green Sync | Passowrd Icon"
-            />
+            <img class="form-icon" src="../../../assets/Icons/password-login.svg" alt="Green Sync | Passowrd Icon" />
           </span>
           <span class="text-light fw-medium">Password</span>
         </label>
-        <input
-          class="bg-transparent border border-1 border-light rounded-5 p-2 text-light ps-3"
-          type="password"
-          placeholder="Enter Password"
-          formControlName="accountPassword"
-        />
+        <input class="bg-transparent border border-1 border-light rounded-5 p-2 text-light ps-3" type="password"
+          placeholder="Enter Password" formControlName="accountPassword" />
 
         @if(loginFormGroup.get('accountPassword')?.hasError('minlength') &&
         loginFormGroup.get('accountPassword')?.dirty &&
@@ -91,36 +61,26 @@
         }
       </div>
       @if(isInvalid){
-      <div
-        @heightAnimation
-        class="small w-100 d-flex justify-content-start align-items-center text-danger gap-1"
-      >
+      <div @heightAnimation class="small w-100 d-flex justify-content-start align-items-center text-danger gap-1">
         <i class="fa-regular fa-circle-info"></i>
         <span>Invalid Email or Password</span>
       </div>
       }
       <!-- Login Button -->
-      <button
-        matRipple
-        (click)="onSubmit($event)"
-        class="form-btn position-relative"
+      <button matRipple (click)="onSubmit($event)" class="form-btn position-relative"
         class="login-button d-flex justify-content-center align-items-center backg-primary p-2 text-light rounded-5"
-        [disabled]="loginFormGroup.invalid"
-        [class.disable-click]="loginFormGroup.invalid"
-      >
-      @if(!isLoading){
+        [disabled]="loginFormGroup.invalid" [class.disable-click]="loginFormGroup.invalid">
+        @if(!isLoading){
         <span>Login</span>
-      }
-      @if(isLoading) {
+        }
+        @if(isLoading) {
         <div class="spinner"></div>
-      }
+        }
       </button>
     </form>
     <div class="small text-light fw-light">
       By logging in, you agree to comply with our Terms and acknowledge our
-      <span class="text-color-prim link-hover cursor-pointer"
-        >Privacy Policy</span
-      >.
+      <span class="text-color-prim link-hover cursor-pointer">Privacy Policy</span>.
     </div>
   </div>
 </div>

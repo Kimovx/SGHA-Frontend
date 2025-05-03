@@ -1,20 +1,25 @@
 <div class="container-fluid vh-100 vw-100 d-flex gap-5">
   <app-side-nav></app-side-nav>
-  <div class="p-5 flex-grow-1 d-flex flex-wrap gap-5">
+  <div class="row pt-5 pb-5 flex-grow-1 row-gap-5 flex-wrap justify-content-center">
     <!-- Section containing temperature and humidity information -->
-    <section class="first-section d-flex gap-4">
+    <section class="double-section d-flex gap-4">
       <!-- Temperature card -->
       <div class="glass-effect d-flex flex-column align-items-center p-4 gap-4">
         <div class="d-flex flex-column gap-3 align-items-center">
           <!-- Icon for temperature -->
           <div class="image-container">
-            <img src="../../../../../assets/Icons/temperature.svg" alt="Temperature icon" />
+        <img src="../../../../../assets/Icons/temperature.svg" alt="Temperature icon" />
           </div>
           <!-- Label for temperature -->
           <span class="text-light">Temperature</span>
         </div>
         <!-- Temperature value -->
-        <span class="text-light fs-6">26<sup><i class="fa-regular fa-circle small"></i></sup>C</span>
+        <span class="text-light fs-6">
+          <ng-container *ngIf="tempValue as value">
+        <span [@numberChange]="value">{{value}}</span>
+          </ng-container>
+          <sup><i class="fa-regular fa-circle small"></i></sup>C
+        </span>
       </div>
 
       <!-- Humidity card -->
@@ -22,7 +27,7 @@
         <div class="d-flex flex-column gap-3 align-items-center">
           <!-- Icon for humidity -->
           <div class="image-container">
-            <img src="../../../../../assets/Icons/cloud.svg" alt="Cloud icon" />
+        <img src="../../../../../assets/Icons/cloud.svg" alt="Cloud icon" />
           </div>
           <!-- Label for humidity -->
           <span class="text-light">Humidity</span>
@@ -33,9 +38,9 @@
     </section>
 
     <!-- Section containing water pH information -->
-    <section class="second-section d-flex gap-4">
+    <section class="single-section d-flex gap-4">
       <!-- Water pH card -->
-      <div class="glass-effect d-flex flex-column gap-4 align-itmes-center justify-content-center p-4">
+      <div class="glass-effect d-flex flex-column gap-4 align-itmes-center justify-content-center p-4 w-100">
         <!-- Label and icon for water pH -->
         <div class="d-flex align-items-center gap-3 text-light">
           <div class="image-container">
@@ -51,7 +56,7 @@
     </section>
 
     <!-- Section containing quick actions for system control -->
-    <section class="third-section d-flex flex-column gap-3 glass-effect p-3 ps-4">
+    <section class="single-section d-flex flex-column gap-3 glass-effect p-3 ps-4">
       <!-- Title for quick actions -->
       <span class="text-light fs-6">Quick Actions</span>
       <!-- Quick action: Stop All Systems -->
@@ -93,7 +98,7 @@
     </section>
 
     <!-- Section containing CO2 level and light intensity information -->
-    <section class="fourth-section d-flex gap-4">
+    <section class="double-section d-flex gap-4">
       <!-- CO2 level card -->
       <div class="glass-effect d-flex flex-column align-items-center p-4 gap-4">
         <div class="d-flex flex-column gap-3 align-items-center">
@@ -122,6 +127,5 @@
         <span class="text-light fs-6">86%</span>
       </div>
     </section>
-
   </div>
 </div>

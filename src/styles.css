@@ -1,6 +1,6 @@
 body {
   background-color: #F5F5F5;
-  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 * {
@@ -39,6 +39,12 @@ input:focus {
   outline: none;
 }
 
+@media (max-width: 1205px) {
+  app-side-nav {
+    display: none !important;
+  }
+
+}
 
 :root {
   --primary-color: #4CAF50;
