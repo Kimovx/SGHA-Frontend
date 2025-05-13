@@ -21,12 +21,12 @@ export const routes: Routes = [
       import('./Modules/house-owner/house-owner.module').then(
         (m) => m.HouseOwnerModule
       ),
+      title: 'Green Sync - House Owner',
   },
   {
     path: '',
     redirectTo: '/login',
     pathMatch: 'full',
-    data: { animation: 'SystemLogin' },
   }, // Default route
   {
     path: 'login',

@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadComponent: () => import('./Components/dashboard/dashboard.component').then(m => m.DashboardComponent),
-    data: { title: 'Dashboard' }
+    title: 'Green Sync - Dashboard'
   }
 ];
 
