@@ -8,16 +8,14 @@
         <div class="d-flex flex-column gap-3 align-items-center">
           <!-- Icon for temperature -->
           <div class="image-container">
-        <img src="../../../../../assets/Icons/temperature.svg" alt="Temperature icon" />
+            <img src="../../../../../assets/Icons/temperature.svg" alt="Temperature icon" />
           </div>
           <!-- Label for temperature -->
           <span class="text-light">Temperature</span>
         </div>
         <!-- Temperature value -->
         <span class="text-light fs-6">
-          <ng-container *ngIf="tempValue as value">
-        <span [@numberChange]="value">{{value}}</span>
-          </ng-container>
+          <span [@numberChange]="tempValue">{{tempValue}}</span>
           <sup><i class="fa-regular fa-circle small"></i></sup>C
         </span>
       </div>
@@ -27,13 +25,13 @@
         <div class="d-flex flex-column gap-3 align-items-center">
           <!-- Icon for humidity -->
           <div class="image-container">
-        <img src="../../../../../assets/Icons/cloud.svg" alt="Cloud icon" />
+            <img src="../../../../../assets/Icons/cloud.svg" alt="Cloud icon" />
           </div>
           <!-- Label for humidity -->
           <span class="text-light">Humidity</span>
         </div>
         <!-- Humidity value -->
-        <span class="text-light fs-6">36%</span>
+        <span [@numberChange]="humValue" class="text-light fs-6">{{humValue}}%</span>
       </div>
     </section>
 
@@ -107,10 +105,10 @@
             <img src="../../../../../assets/Icons/co2.svg" alt="CO2 icon" />
           </div>
           <!-- Label for CO2 level -->
-          <span class="text-light">CO2 Level</span>
+          <span class="text-light">Soil moisture</span>
         </div>
         <!-- CO2 level value -->
-        <span class="text-light fs-6">430ppm</span>
+        <span [@numberChange]="tempValue" class="text-light fs-6">{{monValue}}%</span>
       </div>
 
       <!-- Light intensity card -->

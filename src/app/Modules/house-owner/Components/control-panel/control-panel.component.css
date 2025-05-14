@@ -1,0 +1,29 @@
+.main-container {
+    max-width: 846px;
+    width: 100%;
+    height: fit-content;
+}
+
+.manual-inputs * {
+    transition: 0.3s;
+}
+
+.disabled-inp * {
+    cursor: not-allowed !important;
+    opacity: 0.8 !important;
+}
+
+.spinner {
+    width: 30px;
+    height: 30px;
+}
+
+@media (max-width: 570px) {
+    h1 {
+        font-size: 16px !important;
+    }
+
+    .small {
+        font-size: 9px !important;
+    }
+}

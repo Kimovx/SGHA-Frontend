@@ -1,0 +1,112 @@
+<!-- Main container for the entire page layout -->
+<div class="container-fluid vh-100 vw-100 d-flex gap-5">
+    <!-- Side navigation component -->
+    <app-side-nav></app-side-nav>
+
+    <!-- Main content area -->
+    <div class="flex-grow-1 d-flex justify-content-center align-items-center">
+        <!-- Glass-effect container for the control panel -->
+        <div class="main-container glass-effect d-flex flex-column gap-5 ps-5 pe-5 pt-4 pb-5 position-relative">
+            <!-- Loader for the section -->
+            @if(isLoading){
+                <div @fadeInAnimation class="loader position-absolute bg-black w-100 h-100 top-0 start-0 rounded-5 bg-opacity-50 z-1 d-flex align-items-center justify-content-center">
+                    <div class="spinner"></div>
+                </div>
+            }
+            <!-- Header section with icon and title -->
+            <h1 class="text-light fw-bold d-flex gap-3 align-items-center fs-3">
+                <!-- Control panel icon -->
+                <img src="../../../../../assets/Icons/control-panel-options.svg"
+                    alt="Green Sync - Control Panel Icon" />
+                <!-- Control panel title -->
+                <span>House Control Panel Options</span>
+            </h1>
+            <!-- Control options section -->
+            <div class="d-flex flex-column gap-3">
+                <div class="d-flex flex-column gap-3">
+                    <!-- Automated control toggle -->
+                    <div class="d-flex gap-3 align-items-center ps-2 pe-2">
+                        <div class="checkbox-wrapper-22">
+                            <!-- Toggle switch for automated control -->
+                            <form [formGroup]="form">
+                                <label class="switch" for="automatedControl">
+                                    <input type="checkbox" id="automatedControl" formControlName="automatedControl"
+                                        (change)="checkManualControl(); toggleAutomatedControl();" />
+                                    <div class="slider round"></div>
+                                </label>
+                            </form>
+                        </div>
+                        <!-- Label for the toggle switch -->
+                        <span class="text-light fs-6">Automated Control</span>
+                    </div>
+                    <!-- Divider line -->
+                    <hr class="text-light">
+                </div>
+                <div class="d-flex flex-column gap-4">
+                    <h1 class="text-light fs-4 fw-bold">Manual Control Options</h1>
+                    @if(isManualDisabled === false){
+                    <div @heightAnimation class="d-flex flex-column gap-2 text-warning">
+                        <div class="d-flex gap-2 align-items-center">
+                            <i class="fa-regular fa-triangle-exclamation"></i>
+                            <span class="small">Manual options cannot be modified until automated control is
+                                enabled.</span>
+                        </div>
+                        <div class="d-flex gap-2 align-items-center">
+                            <i class="fa-regular fa-triangle-exclamation"></i>
+                            <span class="small d-flex gap-1">Disabling automated control will deactivate AI and smart
+                                control functionalities.</span>
+                        </div>
+                    </div>
+                    }
+                    <div class="d-flex flex-column gap-3 ps-2 pe-2">
+                        <!-- Lights control toggle -->
+                        <div class="d-flex gap-3 align-items-center manual-inputs"
+                            [class.disabled-inp]="isManualDisabled">
+                            <div class="checkbox-wrapper-22">
+                                <!-- Toggle switch for lights control -->
+                                <form [formGroup]="form">
+                                    <label class="switch" for="toggleLights">
+                                        <input type="checkbox" id="toggleLights" formControlName="toggleLights" (change)="toggleLights()" />
+                                        <div class="slider round"></div>
+                                    </label>
+                                </form>
+                            </div>
+                            <!-- Label for the toggle switch -->
+                            <span class="text-light fs-6">Lights</span>
+                        </div>
+                        <!-- Fans control toggle -->
+                        <div class="d-flex gap-3 align-items-center manual-inputs"
+                            [class.disabled-inp]="isManualDisabled">
+                            <div class="checkbox-wrapper-22">
+                                <!-- Toggle switch for fans control -->
+                                <form [formGroup]="form">
+                                    <label class="switch" for="toggleFans">
+                                        <input type="checkbox" id="toggleFans" formControlName="toggleFans" (change)="toggleFans()" />
+                                        <div class="slider round"></div>
+                                    </label>
+                                </form>
+                            </div>
+                            <!-- Label for the toggle switch -->
+                            <span class="text-light fs-6">Fans</span>
+                        </div>
+                        <!-- Watering control toggle -->
+                        <div class="d-flex gap-3 align-items-center manual-inputs"
+                            [class.disabled-inp]="isManualDisabled">
+                            <div class="checkbox-wrapper-22">
+                                <!-- Toggle switch for watering control -->
+                                <form [formGroup]="form">
+                                    <label class="switch" for="toggleWatering">
+                                        <input type="checkbox" id="toggleWatering" formControlName="toggleWatering" (change)="toggleWatering()"  />
+                                        <div class="slider round"></div>
+                                    </label>
+                                </form>
+                            </div>
+                            <!-- Label for the toggle switch -->
+                            <span class="text-light fs-6">Watering</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

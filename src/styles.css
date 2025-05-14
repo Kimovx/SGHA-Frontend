@@ -10,7 +10,13 @@ body {
   font-family: 'Almarai', sans-serif;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0 !important;
 }
 
@@ -65,6 +71,11 @@ input:focus {
 }
 
 .glass-effect {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
   background: rgba(255, 255, 255, 0.077);
   border-radius: 24px;
   -webkit-border-radius: 24px;
@@ -75,6 +86,15 @@ input:focus {
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-effect:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-5px);
+  -webkit-transform: translateY(-5px);
+  -moz-transform: translateY(-5px);
+  -ms-transform: translateY(-5px);
+  -o-transform: translateY(-5px);
 }
 
 .cursor-pointer {
@@ -128,4 +148,87 @@ input:focus {
   -moz-transition: all 0.2s;
   -ms-transition: all 0.2s;
   -o-transition: all 0.2s;
+}
+
+.checkbox-wrapper-22 {
+  height: 24px;
+}
+
+.checkbox-wrapper-22 .switch {
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  width: 44px;
+}
+
+.checkbox-wrapper-22 .switch input {
+  display: none;
+}
+
+.checkbox-wrapper-22 .slider {
+  background-color: #b0acac;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+}
+
+.checkbox-wrapper-22 .slider:before {
+  background-color: #fff;
+  bottom: 2px;
+  content: "";
+  height: 20px;
+  left: 2px;
+  position: absolute;
+  transition: .4s;
+  width: 20px;
+  -webkit-transition: .4s;
+  -moz-transition: .4s;
+  -ms-transition: .4s;
+  -o-transition: .4s;
+}
+
+.checkbox-wrapper-22 input:checked+.slider {
+  background-color: var(--primary-color);
+}
+
+.checkbox-wrapper-22 input:checked+.slider:before {
+  transform: translateX(20px);
+  -webkit-transform: translateX(20px);
+  -moz-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  -o-transform: translateX(20px);
+}
+
+.checkbox-wrapper-22 .slider.round {
+  border-radius: 34px;
+}
+
+.checkbox-wrapper-22 .slider.round:before {
+  border-radius: 50%;
+}
+
+.spinner {
+  transition: 0.2s;
+  opacity: 1;
+  width: 24px;
+  height: 24px;
+  --c: radial-gradient(farthest-side, #ffffff 92%, #0000);
+  background: var(--c) 50% 0, var(--c) 50% 100%, var(--c) 100% 50%, var(--c) 0 50%;
+  background-size: 5.8px 5.8px;
+  background-repeat: no-repeat;
+  animation: spinner-kh173p 1s infinite;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+
+@keyframes spinner-kh173p {
+  to {
+    transform: rotate(.5turn);
+  }
 }

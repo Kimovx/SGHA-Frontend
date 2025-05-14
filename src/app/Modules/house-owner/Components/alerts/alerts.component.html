@@ -1,0 +1,87 @@
+<div class="container-fluid vh-100 vw-100 d-flex gap-5">
+    <!-- Side navigation component -->
+    <app-side-nav></app-side-nav>
+
+    <!-- Main content area -->
+    <div class="flex-grow-1 d-flex justify-content-center align-items-center">
+        <!-- Glass-effect container for the control panel -->
+        <div class="main-container glass-effect d-flex flex-column gap-5 ps-5 pe-5 pt-4 pb-5 position-relative">
+            <!-- Loader for the section -->
+            <!-- Header section with icon and title -->
+            <h1 class="text-light fw-bold d-flex gap-3 align-items-center fs-3">
+                <!-- Control panel icon -->
+                <img src="../../../../../assets/Icons/control-panel-options.svg"
+                    alt="Green Sync - Control Panel Icon" />
+                <!-- Control panel title -->
+                <span>System Alerts</span>
+            </h1>
+            @if(isLoading){
+            <div class="shimmer-loader w-100 p-3 rounded-4">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-column gap-3 p-2">
+                        <span class="shimmer-line shimmer-text fs-5"></span>
+                        <div class="d-flex flex-column gap-2">
+                            <span class="shimmer-line shimmer-text"></span>
+                            <span class="shimmer-line shimmer-text"></span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="shimmer-circle"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="shimmer-loader w-100 p-3 rounded-4">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-column gap-3 p-2">
+                        <span class="shimmer-line shimmer-text fs-5"></span>
+                        <div class="d-flex flex-column gap-2">
+                            <span class="shimmer-line shimmer-text"></span>
+                            <span class="shimmer-line shimmer-text"></span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="shimmer-circle"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="shimmer-loader w-100 p-3 rounded-4">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-column gap-3 p-2">
+                        <span class="shimmer-line shimmer-text fs-5"></span>
+                        <div class="d-flex flex-column gap-2">
+                            <span class="shimmer-line shimmer-text"></span>
+                            <span class="shimmer-line shimmer-text"></span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="shimmer-circle"></div>
+                    </div>
+                </div>
+            </div>
+            }
+            @else {
+                @for(issue of issues; track issue; let i = $index){
+                <div class="alert-card w-100 p-3 rounded-4">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-column gap-3 p-2">
+                            <span class="text-light fs-5 text-capitalize fw-bold">{{issue.parameter}}</span>
+                            <div class="d-flex flex-column gap-2 text-light">
+                                <span>Reading Value: <span class="text-warning fw-bold">{{issue.value}}</span></span>
+                                <span>Action Needed: <span class="text-warning fw-bold"> {{issue.action}} </span></span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="checkbox-wrapper-18">
+                                <div class="round">
+                                    <input type="checkbox" [id]="i" />
+                                    <label [for]="i"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            }
+        </div>
+    </div>
+</div>

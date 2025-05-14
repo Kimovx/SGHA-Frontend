@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { trigger, transition, animate, keyframes, style } from '@angular/animations';
 import { allAnimations } from '../../../../Animations/all-animations';
+import { SensorsService } from '../../../../../Services/sensors.service';
+import { firstValueFrom } from 'rxjs';
 
 
 @Component({
@@ -23,14 +25,28 @@ import { allAnimations } from '../../../../Animations/all-animations';
 export class DashboardComponent {
 
   tempValue: number = 0;
+  humValue: number = 0;
+  monValue: number = 0;
+
+  isLoading: boolean = true;
+
+  constructor (
+    private sensorsService: SensorsService
+  ){}
 
   ngOnInit(): void {
-    setInterval(() => {
-      this.changeTempValue();
-    }, 1000); // Executes every 2 seconds
+    setInterval(()=>{
+      this.getAllSersors();
+    }, 2000)
   }
 
-  changeTempValue(): void {
-    this.tempValue = Math.floor(Math.random() * 100); // Generates a random number between 0 and 99
+  async getAllSersors(){
+    this.isLoading = true;
+    const data = await firstValueFrom(this.sensorsService.getSensorsReadings());
+    this.tempValue = data.temperature;
+    this.humValue = data.humidity;
+    this.monValue = data.moisture;
+    this.isLoading = false;
   }
+
 }

@@ -1,4 +1,3 @@
-
 /* =========================================================== */
 /* =========================================================== */
 /* =========================================================== */
@@ -42,6 +41,7 @@ h1 {
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(-10px);
   }
@@ -64,6 +64,7 @@ h1 {
   font-family: cairo;
   font-size: 19px;
   font-weight: 400;
+  position: relative;
   height: 38px;
   border: 1px solid white;
   width: 176px;
@@ -75,29 +76,42 @@ h1 {
   -webkit-transition: all 0.2s ease-in-out;
 }
 
-.login-button:hover:not(.disable-click) {
-  /* width: 176px; */
-  opacity: 0.8;
+.login-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.055);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease-in-out;
+}
+
+.login-button:hover:not(.disable-click)::after {
+  transform: scaleX(1);
 }
 
 .spinner {
-  transition: 0.2s ;
+  transition: 0.2s;
   opacity: 1;
   width: 24px;
   height: 24px;
-  --c: radial-gradient(farthest-side,#ffffff 92%,#0000);
-  background: var(--c) 50% 0,         var(--c) 50% 100%,         var(--c) 100% 50%,         var(--c) 0    50%;
+  --c: radial-gradient(farthest-side, #ffffff 92%, #0000);
+  background: var(--c) 50% 0, var(--c) 50% 100%, var(--c) 100% 50%, var(--c) 0 50%;
   background-size: 5.8px 5.8px;
   background-repeat: no-repeat;
   animation: spinner-kh173p 1s infinite;
-  -webkit-transition: 0.2s ;
-  -moz-transition: 0.2s ;
-  -ms-transition: 0.2s ;
-  -o-transition: 0.2s ;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
 }
 
 @keyframes spinner-kh173p {
   to {
-     transform: rotate(.5turn);
+    transform: rotate(.5turn);
   }
 }

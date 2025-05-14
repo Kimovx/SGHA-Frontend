@@ -4,6 +4,7 @@ li {
 
 li a {
   cursor: pointer;
+  opacity: 0.6;
   transition: 0.3s;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
@@ -11,8 +12,18 @@ li a {
   -o-transition: 0.3s;
 }
 
-li a:hover  {
-  opacity: 0.8;
+li a:hover:not(.active) {
+  opacity: 1;
+  transform: translateX(7px);
+  -webkit-transform: translateX(7px);
+  -moz-transform: translateX(7px);
+  -ms-transform: translateX(7px);
+  -o-transform: translateX(7px);
+}
+
+.active {
+  opacity: 1 !important;
+  cursor: default !important;
   transform: translateX(7px);
   -webkit-transform: translateX(7px);
   -moz-transform: translateX(7px);
