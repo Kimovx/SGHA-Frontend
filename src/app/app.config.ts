@@ -18,8 +18,10 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       ToastrModule.forRoot({
         timeOut: 3000,
-        positionClass: 'toast-top-left',
-        preventDuplicates: true,
+        positionClass: 'toast-top-center',
+        toastClass: 'dark-glass-toaster',
+        maxOpened: 1,
+        autoDismiss: true,
       })
     ),
     importProvidersFrom(BrowserAnimationsModule)
