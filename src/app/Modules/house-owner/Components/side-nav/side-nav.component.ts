@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { allAnimations } from '../../../../Animations/all-animations';
 
@@ -13,6 +13,8 @@ import { allAnimations } from '../../../../Animations/all-animations';
   styleUrl: './side-nav.component.css'
 })
 export class SideNavComponent {
+  @ViewChild('nav') nav!: ElementRef;
+
   isMenuOpen = false;
 
   constructor() { }
@@ -21,5 +23,11 @@ export class SideNavComponent {
     if (nav) {
       nav.classList.toggle('active-nav');
     }
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    this.isMenuOpen = false;
+    this.nav.nativeElement.classList.remove('active-nav');
   }
 }
