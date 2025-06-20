@@ -11,7 +11,7 @@ export class NotificationsService {
     const isHidden = document.visibilityState === 'hidden';
 
     if (isHidden) {
-      const audio = new Audio('assets/Voices/noti.mp3');
+      const audio = new Audio('../../../../../assets/Voices/noti.mp3');
       audio.play();
       
       let isOriginal = true;
