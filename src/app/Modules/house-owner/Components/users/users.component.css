@@ -7,7 +7,10 @@
 }
 
 section {
+    width: fit-content;
+    max-width: fit-content;
     min-width: 340px;
+    min-height: 500px;
 }
 
 .glass-effect {
@@ -34,6 +37,7 @@ section {
 
 .user-card {
     min-width: 214px;
+    max-width: 214px;
 }
 
 .card-icons {

@@ -27,4 +27,24 @@ export class NotificationsService {
       }, 6000);
     }
   }
+
+  askNotificationPermission() {
+  if ('Notification' in window) {
+    if (Notification.permission === 'default') {
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          console.log('🔔 Notification permission granted!');
+        } else if (permission === 'denied') {
+          console.log('❌ Notification permission denied.');
+        }
+      });
+    } else if (Notification.permission === 'granted') {
+      console.log('✅ Notification permission already granted.');
+    } else {
+      console.log('❌ Notification already denied.');
+    }
+  } else {
+    console.warn('⚠️ Browser does not support notifications.');
+  }
+}
 }

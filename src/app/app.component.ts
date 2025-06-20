@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { routeTransitionAnimations } from './Animations/route-animations';
 import { ToastrModule } from 'ngx-toastr';
 import { SignalRService } from '../Services/signal-r.service';
+import { NotificationsService } from '../Services/notifications.service';
 
 @Component({
   selector: 'app-root',
@@ -21,34 +22,13 @@ export class AppComponent implements OnInit {
     private signalRService: SignalRService,
     private router: Router,
     protected route: ActivatedRoute,
+    private notificationService: NotificationsService
   ) { }
-
 
   ngOnInit(): void {
     this.signalRService.startConnection();
-    this.askNotificationPermission();
+    this.notificationService.askNotificationPermission();
   }
-
-  askNotificationPermission() {
-  if ('Notification' in window) {
-    if (Notification.permission === 'default') {
-      Notification.requestPermission().then(permission => {
-        if (permission === 'granted') {
-          console.log('🔔 Notification permission granted!');
-        } else if (permission === 'denied') {
-          console.log('❌ Notification permission denied.');
-        }
-      });
-    } else if (Notification.permission === 'granted') {
-      console.log('✅ Notification permission already granted.');
-    } else {
-      console.log('❌ Notification already denied.');
-    }
-  } else {
-    console.warn('⚠️ Browser does not support notifications.');
-  }
-}
-
 
   // This method is used to prepare the route for animations
   prepareRoute(outlet: RouterOutlet | null) {

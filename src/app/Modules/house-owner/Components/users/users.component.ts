@@ -14,11 +14,13 @@ import { UsersService } from '../../../../../Services/users.service';
 })
 export class UsersComponent implements OnInit {
   users: any[];
+  isLoading: boolean;
 
   constructor(
     private usersService: UsersService
   ) {
     this.users = [];
+    this.isLoading = true;
   }
 
   ngOnInit(): void {
@@ -26,8 +28,9 @@ export class UsersComponent implements OnInit {
   }
 
   async getUsersByHouseId(): Promise<void>{
+    this.isLoading = true;
     this.users = await firstValueFrom(this.usersService.getUsersByHouseId(1));
-    console.log(this.users);
+    this.isLoading = false;
   }
 
 }
