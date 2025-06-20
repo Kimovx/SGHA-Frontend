@@ -1,0 +1,64 @@
+.container-fluid {
+    height: fit-content !important;
+}
+
+.row {
+    column-gap: 59px;
+}
+
+section {
+    min-width: 340px;
+}
+
+.glass-effect {
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+
+.glass-effect:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
+    -moz-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    -o-transform: translateY(-5px);
+}
+
+.text-small {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.733);
+}
+
+.user-card {
+    min-width: 214px;
+}
+
+.card-icons {
+    right: 15px;
+}
+
+.shimmer-loader * {
+    transition: 0.2s;
+}
+
+.shimmer-loader {
+    width: 40%;
+    height: 1rem;
+    background: linear-gradient(90deg, #ffffff25 25%, #f8f8f8 50%, #ffffff25 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}

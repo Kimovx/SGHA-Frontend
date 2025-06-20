@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SideNavComponent } from '../side-nav/side-nav.component';
+import { firstValueFrom } from 'rxjs';
+import { UsersService } from '../../../../../Services/users.service';
 
 @Component({
   selector: 'app-users',
@@ -10,6 +12,22 @@ import { SideNavComponent } from '../side-nav/side-nav.component';
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
+  users: any[];
+
+  constructor(
+    private usersService: UsersService
+  ) {
+    this.users = [];
+  }
+
+  ngOnInit(): void {
+    this.getUsersByHouseId();
+  }
+
+  async getUsersByHouseId(): Promise<void>{
+    this.users = await firstValueFrom(this.usersService.getUsersByHouseId(1));
+    console.log(this.users);
+  }
 
 }
