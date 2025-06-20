@@ -6,6 +6,7 @@ import { trigger, transition, animate, keyframes, style } from '@angular/animati
 import { allAnimations } from '../../../../Animations/all-animations';
 import { SensorsService } from '../../../../../Services/sensors.service';
 import { firstValueFrom } from 'rxjs';
+import { SignalRService } from '../../../../../Services/signal-r.service';
 
 
 @Component({
@@ -31,13 +32,24 @@ export class DashboardComponent {
   isLoading: boolean = true;
 
   constructor (
-    private sensorsService: SensorsService
+    private sensorsService: SensorsService,
+    private signalRService: SignalRService
   ){}
 
   ngOnInit(): void {
-    setInterval(()=>{
-      this.getAllSersors();
-    }, 2000)
+    this.getAllSersors();
+  }
+  
+  getSensorsData() {
+    this.signalRService.startSensorsConnection();
+    this.signalRService.sensorUpdate$.subscribe((data) => {
+      if(data){
+        console.log('Sensor Data:', data);  
+        this.tempValue = data.temperature;
+        this.humValue = data.humidity;
+        this.monValue = data.moisture;
+      }
+    });
   }
 
   async getAllSersors(){
@@ -47,6 +59,7 @@ export class DashboardComponent {
     this.humValue = data.humidity;
     this.monValue = data.moisture;
     this.isLoading = false;
+    this.getSensorsData();
   }
 
 }

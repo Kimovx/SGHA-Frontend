@@ -7,6 +7,7 @@ import { allAnimations } from '../../../../Animations/all-animations';
 import { ControlService } from '../../../../../Services/control.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { SignalRService } from '../../../../../Services/signal-r.service';
 
 @Component({
   selector: 'app-control-panel',
@@ -20,81 +21,66 @@ import { CommonModule } from '@angular/common';
   templateUrl: './control-panel.component.html',
   styleUrl: './control-panel.component.css'
 })
-/**
- * The `ControlPanelComponent` is responsible for managing the control panel functionality
- * in the application. It allows toggling between automated and manual control modes
- * for various systems such as lights, fans, and watering.
- * 
- * This component uses Angular's reactive forms to manage the state of the controls
- * and dynamically enables or disables manual controls based on the selected mode.
- * 
- * @class
- * @implements {OnInit}
- */
 export class ControlPanelComponent {
-  /**
-   * The reactive form group that holds the state of the control panel.
-   * @type {FormGroup}
-   */
   form!: FormGroup;
-
-  /**
-   * A flag indicating whether manual controls are disabled.
-   * @type {boolean}
-   */
-
   isManualDisabled: boolean | null = null;
   isLoading: boolean = true;
-
   controlOptions: any
 
-  /**
-   * Constructor for the `ControlPanelComponent`.
-   * Initializes the form builder dependency.
-   * 
-   * @param {FormBuilder} fb - The Angular `FormBuilder` service for creating reactive forms.
-   */
   constructor(
     private toaster: ToastrService,
     private fb: FormBuilder,
-    private controlService: ControlService
-
+    private controlService: ControlService,
+    private signalRService: SignalRService
   ) { }
 
-  /**
-   * Lifecycle hook that is called after the component is initialized.
-   * Builds the form and checks the initial state of manual controls.
-   */
   ngOnInit(): void {
+    this.signalRService.startConnection();
     this.buildForm();
     this.getControlData();
   }
 
-  async getControlData() {
+  async getControlData(): Promise<void> {
     this.isLoading = true;
-    this.controlOptions = await firstValueFrom(this.controlService.getControlData());    
+    
+    const data = await firstValueFrom(this.controlService.getControlData());
+    this.controlOptions = data;
+    console.log('Control Options:', this.controlOptions);
+
     this.form.patchValue({
-      automatedControl: this.controlOptions[this.controlOptions.length - 1].isAutomated,
-      toggleLights: this.controlOptions[this.controlOptions.length - 1].lightStatus,
-      toggleFans: this.controlOptions[this.controlOptions.length - 1].fanStatus,
-      toggleWatering: this.controlOptions[this.controlOptions.length - 1].waterStatus,
+      automatedControl: this.controlOptions[0].isAutomated,
+      toggleLights: this.controlOptions[0].lightStatus,
+      toggleFans: this.controlOptions[0].fanStatus,
+      toggleWatering: this.controlOptions[0].waterStatus,
     });
+
     this.checkManualControl();
     this.isLoading = false;
+    this.updateControlDataFromSignalR();
   }
 
-  /**
-   * Checks the value of the `automatedControl` field in the form.
-   * Disables or enables manual controls based on the value.
-   */
+  updateControlDataFromSignalR(): void {
+    this.isLoading = true;
+    this.signalRService.controlUpdate$.subscribe((data) => {
+      if (data) {
+        console.log('Received control update from SignalR:', data);
+        this.controlOptions = data;
+        this.form.patchValue({
+          automatedControl: data.isAutomated,
+          toggleLights: data.lightStatus,
+          toggleFans: data.fanStatus,
+          toggleWatering: data.waterStatus,
+        });
+        this.checkManualControl();
+      }
+      this.isLoading = false;
+    });
+  }
+
   checkManualControl(): void {
     this.form.get('automatedControl')?.value == 1 ? this.disableManualControl() : this.enableManualControl();
   }
 
-  /**
-   * Disables all manual control fields in the form.
-   * This is triggered when `automatedControl` is enabled.
-   */
   disableManualControl(): void {
     this.isManualDisabled = true;
     this.form.get('toggleLights')?.disable();
@@ -102,10 +88,6 @@ export class ControlPanelComponent {
     this.form.get('toggleWatering')?.disable();
   }
 
-  /**
-   * Enables all manual control fields in the form.
-   * This is triggered when `automatedControl` is disabled.
-   */
   enableManualControl(): void {
     this.isManualDisabled = false;
     this.form.get('toggleLights')?.enable();
@@ -113,16 +95,12 @@ export class ControlPanelComponent {
     this.form.get('toggleWatering')?.enable();
   }
 
-  /**
-   * Builds the reactive form for the control panel.
-   * Initializes the form fields with default values.
-   */
   buildForm(): void {
     this.form = this.fb.group({
-      automatedControl: [], // Default to automated control enabled
-      toggleLights: [],   // Default to lights off
-      toggleFans: [],     // Default to fans off
-      toggleWatering: []  // Default to watering off
+      automatedControl: [],
+      toggleLights: [],
+      toggleFans: [],
+      toggleWatering: []
     });
   }
 
@@ -132,7 +110,7 @@ export class ControlPanelComponent {
       try {
         await firstValueFrom(this.controlService.turnAutomatedOn());
         this.toaster.success("Automated control is enabled");
-        this.getControlData();
+        this.updateControlDataFromSignalR();
         this.isLoading = false;
       } catch (e: any) {
         this.toaster.error("Something Worng!");
@@ -153,7 +131,7 @@ export class ControlPanelComponent {
   }
 
   async toggleWatering() {
-      this.isLoading = true;
+    this.isLoading = true;
     if (this.form.get('toggleWatering')?.value === true) {
       try {
         await firstValueFrom(this.controlService.turnWaterOn());
@@ -178,7 +156,7 @@ export class ControlPanelComponent {
   }
 
   async toggleLights() {
-      this.isLoading = true;
+    this.isLoading = true;
     if (this.form.get('toggleLights')?.value === true) {
       try {
         await firstValueFrom(this.controlService.turnLightOn());

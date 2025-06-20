@@ -45,13 +45,6 @@ input:focus {
   outline: none;
 }
 
-@media (max-width: 1205px) {
-  app-side-nav {
-    display: none !important;
-  }
-
-}
-
 :root {
   --primary-color: #4CAF50;
   --secondary-color: #0E9D9B;

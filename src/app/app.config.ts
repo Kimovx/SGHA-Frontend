@@ -23,7 +23,6 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     importProvidersFrom(BrowserAnimationsModule)
-
   ]
 };
 
