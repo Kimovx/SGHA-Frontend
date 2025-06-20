@@ -1,37 +1,51 @@
-<div class="d-flex flex-column gap-5 pt-4 ps-0 user-select-none ps-lg-3">
-  <div class="img-container d-flex justify-content-center">
-    <img src="../../../../../assets/GreenSyncLogo.svg" alt="Green Sync Logo"/>
+<div class="haha d-flex flex-column gap-5 pt-0 pt-xl-4 ps-0 user-select-none ps-lg-3">
+
+  <div class="d-flex d-xl-none flex-column gap-2 align-items-start p-3 align-items-sm-center">
+    <div class="img-container d-flex justify-content-center w-100 justify-content-center">
+      <img src="../../../../../assets/GreenSyncLogo.svg" class="w-50" alt="Green Sync Logo" />
+    </div>
+
+    <button @fadeInAnimation matRipple (click)="toggleMenu(nav)"
+      class="border-0 glass-effect p-2 d-flex d-xl-none justify-content-center w-25">
+      <i class="fa-regular fa-bars text-light"></i>
+    </button>
   </div>
 
-  <button (click)="toggleMenu(nav)" class="border-0 glass-effect p-2 d-flex d-xl-none justify-content-center w-25">
-    <i class="fa-regular fa-bars text-light"></i>
-  </button>
+  <div class="d-none d-xl-block img-container d-flex justify-content-center">
+    <img src="../../../../../assets/GreenSyncLogo.svg" alt="Green Sync Logo" />
+  </div>
 
   @if(isMenuOpen){
-    <div @fadeInAnimation (click)="toggleMenu(nav)" class="overlay position-fixed w-100 h-100 top-0 start-0 bg-black bg-opacity-25 z-1"></div>
+  <div @fadeInAnimation (click)="toggleMenu(nav)"
+    class="overlay position-fixed w-100 h-100 top-0 start-0 bg-black bg-opacity-25 z-1"></div>
   }
 
   <!-- List with Items -->
   <ul #nav class="list-unstyled ps-4 d-flex flex-column gap-5">
-    <li><a routerLinkActive="active" routerLink="/house-owner/dashboard" class="text-decoration-none text-light d-flex gap-2 align-items-center">
-      <img src="../../../../../assets/Icons/dashboard.svg" alt="Dashboard Icon"/>
-      <span class="fs-5">Dashboard</span>
-    </a></li>
-    <li><a routerLinkActive="active" routerLink="/house-owner/users" class="text-decoration-none text-light d-flex gap-2 align-items-center">
-      <img src="../../../../../assets/Icons/users.svg" alt="Users Icon"/>
-      <span class="fs-5">Users</span>
-    </a></li>
-    <li><a routerLinkActive="active" routerLink="/house-owner/control-panel" class="text-decoration-none text-light d-flex gap-2 align-items-center">
-      <img src="../../../../../assets/Icons/control-panel.svg" alt="Control Panel Icon"/>
-      <span class="fs-5">Control Panel</span>
-    </a></li>
-    <li><a routerLinkActive="active" routerLink="/house-owner/alerts" class="text-decoration-none text-light d-flex gap-2 align-items-center">
-      <img src="../../../../../assets/Icons/alrets.svg" alt="Alerts Icon"/>
-      <span class="fs-5">Alerts</span>
-    </a></li>
-    <li><a routerLinkActive="active" routerLink="/house-owner/users" class="text-decoration-none text-light d-flex gap-2 align-items-center">
-      <img src="../../../../../assets/Icons/settings.svg" alt="Users Icon"/>
-      <span class="fs-5">Settings</span>
-    </a></li>
+    <li><a routerLinkActive="active" routerLink="/house-owner/dashboard"
+        class="text-decoration-none text-light d-flex gap-2 align-items-center">
+        <img src="../../../../../assets/Icons/dashboard.svg" alt="Dashboard Icon" />
+        <span class="fs-5">Dashboard</span>
+      </a></li>
+    <li><a routerLinkActive="active" routerLink="/house-owner/users"
+        class="text-decoration-none text-light d-flex gap-2 align-items-center">
+        <img src="../../../../../assets/Icons/users.svg" alt="Users Icon" />
+        <span class="fs-5">Users</span>
+      </a></li>
+    <li><a routerLinkActive="active" routerLink="/house-owner/control-panel"
+        class="text-decoration-none text-light d-flex gap-2 align-items-center">
+        <img src="../../../../../assets/Icons/control-panel.svg" alt="Control Panel Icon" />
+        <span class="fs-5">Control Panel</span>
+      </a></li>
+    <li><a routerLinkActive="active" routerLink="/house-owner/alerts"
+        class="text-decoration-none text-light d-flex gap-2 align-items-center">
+        <img src="../../../../../assets/Icons/alrets.svg" alt="Alerts Icon" />
+        <span class="fs-5">Alerts</span>
+      </a></li>
+    <li><a routerLinkActive="active" routerLink="/house-owner/users"
+        class="text-decoration-none text-light d-flex gap-2 align-items-center">
+        <img src="../../../../../assets/Icons/settings.svg" alt="Users Icon" />
+        <span class="fs-5">Settings</span>
+      </a></li>
   </ul>
 </div>

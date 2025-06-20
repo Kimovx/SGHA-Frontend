@@ -110,7 +110,6 @@ export class ControlPanelComponent {
       try {
         await firstValueFrom(this.controlService.turnAutomatedOn());
         this.toaster.success("Automated control is enabled");
-        this.updateControlDataFromSignalR();
         this.isLoading = false;
       } catch (e: any) {
         this.toaster.error("Something Worng!");

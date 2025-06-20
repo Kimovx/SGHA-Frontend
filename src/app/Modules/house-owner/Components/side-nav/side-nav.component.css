@@ -71,5 +71,20 @@ li a:hover:not(.active) {
     -moz-border-radius: 0 28px 28px 0;
     -ms-border-radius: 0 28px 28px 0;
     -o-border-radius: 0 28px 28px 0;
+  }
 }
+
+.sticky-top {
+  border-radius: 0px 0px 28px 28px;
+  width: 100vw;
+  backdrop-filter: blur(10px);
+  transform: translate(-12px);
+  -webkit-transform: translate(-12px);
+  -moz-transform: translate(-12px);
+  -ms-transform: translate(-12px);
+  -o-transform: translate(-12px);
+  -webkit-border-radius: 0px 0px 28px 28px;
+  -moz-border-radius: 0px 0px 28px 28px;
+  -ms-border-radius: 0px 0px 28px 28px;
+  -o-border-radius: 0px 0px 28px 28px;
 }

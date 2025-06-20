@@ -1,12 +1,14 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { allAnimations } from '../../../../Animations/all-animations';
+import { MatRippleModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-side-nav',
   standalone: true,
   imports: [
-    RouterModule
+    RouterModule,
+    MatRippleModule
   ],
   animations: [allAnimations],
   templateUrl: './side-nav.component.html',
