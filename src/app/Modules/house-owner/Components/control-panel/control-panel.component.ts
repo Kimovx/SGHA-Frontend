@@ -8,6 +8,8 @@ import { ControlService } from '../../../../../Services/control.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { SignalRService } from '../../../../../Services/signal-r.service';
+import { Title } from '@angular/platform-browser';
+import { NotificationsService } from '../../../../../Services/notifications.service';
 
 @Component({
   selector: 'app-control-panel',
@@ -31,18 +33,18 @@ export class ControlPanelComponent {
     private toaster: ToastrService,
     private fb: FormBuilder,
     private controlService: ControlService,
-    private signalRService: SignalRService
+    private signalRService: SignalRService,
+    private notificationsService: NotificationsService,
   ) { }
 
   ngOnInit(): void {
-    this.signalRService.startConnection();
     this.buildForm();
     this.getControlData();
   }
 
   async getControlData(): Promise<void> {
     this.isLoading = true;
-    
+
     const data = await firstValueFrom(this.controlService.getControlData());
     this.controlOptions = data;
     console.log('Control Options:', this.controlOptions);
@@ -63,8 +65,10 @@ export class ControlPanelComponent {
     this.isLoading = true;
     this.signalRService.controlUpdate$.subscribe((data) => {
       if (data) {
-        console.log('Received control update from SignalR:', data);
+        console.log('Control Update Received:', data);
         this.controlOptions = data;
+        this.notificationsService.setNotification("Control Updaded!");
+
         this.form.patchValue({
           automatedControl: data.isAutomated,
           toggleLights: data.lightStatus,
