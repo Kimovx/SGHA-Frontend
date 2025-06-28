@@ -24,7 +24,7 @@ export class SignalRService {
 
   startConnection() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('http://greeensync-001-site1.jtempurl.com/controlStatusHub')
+      .withUrl('https://greeensync-001-site1.jtempurl.com/controlStatusHub')
       .withAutomaticReconnect()
       .build();
 
