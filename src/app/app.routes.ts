@@ -27,7 +27,7 @@ export const routes: Routes = [
     path: '',
     redirectTo: '/login',
     pathMatch: 'full',
-  }, // Default route
+  },
   {
     path: 'login',
     loadComponent : () =>

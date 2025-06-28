@@ -16,11 +16,12 @@
         <!-- Temperature value -->
         <span class="text-light fs-6">
           <ng-container *ngIf="!isLoading; else loading">
-            <span [@numberChange]="tempValue">{{tempValue}}</span>
+            <span [@numberChange]="data.temperature">{{data.temperature}}</span>
             <sup><i class="fa-regular fa-circle small"></i></sup>C
           </ng-container>
           <ng-template #loading>
-            <span class="shimmer-loader" style="display: inline-block; width: 40px; height: 1em; border-radius: 4px;"></span>
+            <span class="shimmer-loader"
+              style="display: inline-block; width: 40px; height: 1em; border-radius: 4px;"></span>
           </ng-template>
         </span>
       </div>
@@ -38,10 +39,11 @@
         <!-- Humidity value -->
         <span class="text-light fs-6">
           <ng-container *ngIf="!isLoading; else loadingHum">
-            <span [@numberChange]="humValue">{{humValue}}</span>%
+            <span [@numberChange]="data.humidity">{{data.humidity}}</span>%
           </ng-container>
           <ng-template #loadingHum>
-            <span class="shimmer-loader" style="display: inline-block; width: 40px; height: 1em; border-radius: 4px;"></span>
+            <span class="shimmer-loader"
+              style="display: inline-block; width: 40px; height: 1em; border-radius: 4px;"></span>
           </ng-template>
         </span>
       </div>
@@ -122,10 +124,11 @@
         <!-- CO2 level value -->
         <span class="text-light fs-6">
           <ng-container *ngIf="!isLoading; else loadingMon">
-            <span [@numberChange]="monValue">{{monValue}}%</span>
+            <span [@numberChange]="data.moisture">{{data.moisture}}%</span>
           </ng-container>
           <ng-template #loadingMon>
-            <span class="shimmer-loader" style="display: inline-block; width: 40px; height: 1em; border-radius: 4px;"></span>
+            <span class="shimmer-loader"
+              style="display: inline-block; width: 40px; height: 1em; border-radius: 4px;"></span>
           </ng-template>
         </span>
       </div>
@@ -138,15 +141,16 @@
             <img src="../../../../../assets/Icons/light.svg" alt="Light intensity icon" />
           </div>
           <!-- Label for light intensity -->
-          <span class="text-light">Light Intensity</span>
+          <span class="text-light">Air Quality</span>
         </div>
         <!-- Light intensity value -->
         <span class="text-light fs-6">
           <ng-container *ngIf="!isLoading; else loadingLight">
-            86%
+            <span [@numberChange]="data.airQuality">{{data.airQuality}}%</span>
           </ng-container>
           <ng-template #loadingLight>
-            <span class="shimmer-loader" style="display: inline-block; width: 40px; height: 1em; border-radius: 4px;"></span>
+            <span class="shimmer-loader"
+              style="display: inline-block; width: 40px; height: 1em; border-radius: 4px;"></span>
           </ng-template>
         </span>
       </div>

@@ -7,6 +7,8 @@ import { allAnimations } from '../../../../Animations/all-animations';
 import { SensorsService } from '../../../../../Services/sensors.service';
 import { firstValueFrom } from 'rxjs';
 import { SignalRService } from '../../../../../Services/signal-r.service';
+import { CameraService } from '../../../../../Services/camera.service';
+import { SensoresReadings } from '../../../../../Model View/SensorsReadings';
 
 
 @Component({
@@ -24,42 +26,60 @@ import { SignalRService } from '../../../../../Services/signal-r.service';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-
-  tempValue: number = 0;
-  humValue: number = 0;
-  monValue: number = 0;
-
+  data: SensoresReadings;
+  
   isLoading: boolean = true;
+
+  selectedImage!: File;
 
   constructor (
     private sensorsService: SensorsService,
-    private signalRService: SignalRService
-  ){}
+    private signalRService: SignalRService,
+    private cameraService: CameraService
+  ){
+    this.data = {} as SensoresReadings;
+  }
 
   ngOnInit(): void {
     this.getAllSersors();
   }
   
   getSensorsData() {
-    this.signalRService.startSensorsConnection();
     this.signalRService.sensorUpdate$.subscribe((data) => {
       if(data){
         console.log('Sensor Data:', data);  
-        this.tempValue = data.temperature;
-        this.humValue = data.humidity;
-        this.monValue = data.moisture;
+        this.data = data;
       }
     });
   }
 
   async getAllSersors(){
     this.isLoading = true;
-    const data = await firstValueFrom(this.sensorsService.getSensorsReadings());
-    this.tempValue = data.temperature;
-    this.humValue = data.humidity;
-    this.monValue = data.moisture;
+    this.data = await firstValueFrom(this.sensorsService.getSensorsReadings());
+    
     this.isLoading = false;
     this.getSensorsData();
   }
 
+  onFileSelected(event: any){
+    const file = event.target.files[0];
+    if(file) {
+      this.selectedImage = file;
+    }
+  }
+
+  async upload(){
+    if(!this.selectedImage) {
+      alert("No file selected to upload!");
+      return;
+    }
+    
+    try {
+      const res = await firstValueFrom(this.cameraService.uploadImage(1, this.selectedImage));
+    }
+    catch (e: any) {
+      console.log(e.message);
+    }
+
+  }
 }

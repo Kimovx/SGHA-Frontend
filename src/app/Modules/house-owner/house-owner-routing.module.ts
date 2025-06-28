@@ -26,6 +26,11 @@ const routes: Routes = [
     path: 'alerts',
     loadComponent: () => import('./Components/alerts/alerts.component').then(m => m.AlertsComponent),
     title: 'Green Sync - System Alerts'
+  },
+  {
+    path: 'visuals',
+    loadComponent: () => import('./Components/visuals/visuals.component').then(m => m.VisualsComponent),
+    title: 'Green Sync - System Visuals'
   }
 ];
 

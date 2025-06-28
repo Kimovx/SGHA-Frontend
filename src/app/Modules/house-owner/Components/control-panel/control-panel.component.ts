@@ -65,17 +65,19 @@ export class ControlPanelComponent {
     this.isLoading = true;
     this.signalRService.controlUpdate$.subscribe((data) => {
       if (data) {
-        console.log('Control Update Received:', data);
-        this.controlOptions = data;
-        this.notificationsService.setNotification("Control Updaded!");
-
-        this.form.patchValue({
-          automatedControl: data.isAutomated,
-          toggleLights: data.lightStatus,
-          toggleFans: data.fanStatus,
-          toggleWatering: data.waterStatus,
-        });
-        this.checkManualControl();
+        if(data !== this.controlOptions){
+          console.log('Control Update Received:', data);
+          this.controlOptions = data;
+          this.notificationsService.setNotification("Control Updaded!");
+  
+          this.form.patchValue({
+            automatedControl: data.isAutomated,
+            toggleLights: data.lightStatus,
+            toggleFans: data.fanStatus,
+            toggleWatering: data.waterStatus,
+          });
+          this.checkManualControl();
+        }
       }
       this.isLoading = false;
     });

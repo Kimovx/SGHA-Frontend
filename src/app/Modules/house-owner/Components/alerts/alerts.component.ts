@@ -3,6 +3,7 @@ import { SideNavComponent } from '../side-nav/side-nav.component';
 import { AIIssuesService } from '../../../../../Services/aiissues.service';
 import { firstValueFrom } from 'rxjs';
 import { setAlternateWeakRefImpl } from '@angular/core/primitives/signals';
+import { SignalRService } from '../../../../../Services/signal-r.service';
 
 @Component({
   selector: 'app-alerts',
@@ -18,11 +19,12 @@ export class AlertsComponent implements OnInit {
   isLoading: boolean = true;
 
   constructor(
-    private aiIssuesService: AIIssuesService
+    private aiIssuesService: AIIssuesService,
+    private signalRService: SignalRService
   ) { }
 
   ngOnInit(): void {
-    this.getAllIssues()
+    this.getAllIssues();
   }
 
   async getAllIssues() {
@@ -30,5 +32,17 @@ export class AlertsComponent implements OnInit {
     this.issues = await firstValueFrom(this.aiIssuesService.getAllIssues());
     this.isLoading = false;
   }
+
+
+  updateAIIssuesFromSignalR(): void {
+    this.signalRService.issuesUpdate$.subscribe((data) => {
+      if (data) {
+        this.issues = data;
+        console.log('AI Issue Update Received:', data);
+      }
+    });
+  }
+
+
 
 }
