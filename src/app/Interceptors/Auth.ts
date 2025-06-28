@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const username = '11240522';
+  const username = '11251830';
   const password = '60-dayfreetrial';
   const authHeader = 'Basic ' + btoa(`${username}:${password}`);
 

@@ -16,10 +16,10 @@ export class CameraService {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post(`https://greensync2025-001-site1.ntempurl.com/api/Camera/${houseId}/upload`, formData);
+    return this.http.post(`http://greeensync-001-site1.jtempurl.com/api/Camera/${houseId}/upload`, formData);
   }
 
   getMedia(houseId: number): Observable<any[]> {
-    return this.http.get<any[]>(`https://greensync2025-001-site1.ntempurl.com/api/Camera/${houseId}/media`);
+    return this.http.get<any[]>(`http://greeensync-001-site1.jtempurl.com/api/Camera/${houseId}/media`);
   }
 }
