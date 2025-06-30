@@ -1,0 +1,104 @@
+ngb-carousel {
+    max-width: 400px;
+    min-height: 300px;
+}
+
+img {
+    max-width: 400px;
+}
+
+.table-glass {
+    background: rgba(255, 255, 255, 0.05);
+    /* شبه شفاف أبيض */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+}
+
+.shimmer-loader {
+    min-width: 400px;
+    min-height: 300px;
+    position: relative;
+    overflow: hidden;
+    background: #222831;
+    /* dark background */
+    border-radius: 8px;
+}
+
+.shimmer {
+    width: 100%;
+    height: 100%;
+    animation: shimmer 1.5s infinite linear;
+    background: linear-gradient(to right,
+            #222831 0%,
+            #393e46 50%,
+            #222831 100%);
+    background-size: 200% 100%;
+    border-radius: 8px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.gallery-item {
+    background: rgba(255, 255, 255, 0.02);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    -webkit-transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -moz-transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -ms-transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -o-transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item::after {
+    content: "\f06e     Preview";
+    font-family: "Font Awesome 6 Pro";
+    font-weight: 800;
+    position: absolute;
+    border-radius: 100px;
+    color: white;
+    background: rgba(0, 0, 0, 0.142);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+}
+
+.gallery-hover {
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-hover {
+    opacity: 1;
+}

@@ -8,7 +8,7 @@ import { SensorsService } from '../../../../../Services/sensors.service';
 import { firstValueFrom } from 'rxjs';
 import { SignalRService } from '../../../../../Services/signal-r.service';
 import { CameraService } from '../../../../../Services/camera.service';
-import { SensoresReadings } from '../../../../../Model View/SensorsReadings';
+import { SensoresReadings } from '../../../../Model View/SensorsReadings';
 
 
 @Component({

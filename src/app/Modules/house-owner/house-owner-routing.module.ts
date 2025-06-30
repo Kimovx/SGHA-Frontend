@@ -31,6 +31,11 @@ const routes: Routes = [
     path: 'visuals',
     loadComponent: () => import('./Components/visuals/visuals.component').then(m => m.VisualsComponent),
     title: 'Green Sync - System Visuals'
+  },
+  {
+    path: 'image-profile/:image-id',
+    loadComponent: () => import('./Components/image-profile/image-profile.component').then(m => m.ImageProfileComponent),
+    title: 'Green Sync - Image Profile'
   }
 ];
 

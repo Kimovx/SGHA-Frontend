@@ -1,4 +1,4 @@
-<div class="container-fluid min-vh-100 min-vw-100 pt-2 pb-2 justify-content-center align-items-center">
+<!-- <div class="container-fluid min-vh-100 min-vw-100 pt-2 pb-2 justify-content-center align-items-center">
     <section class="glass-effect w-100 d-flex gap-5 p-3 flex-wrap">
         @for(image of data; track image){
         <div class="img-container d-flex">
@@ -6,4 +6,57 @@
         </div>
         }
     </section>
+</div> -->
+
+<div class="container-fluid flex-column flex-xl-row vh-100 vw-100 d-flex gap-5">
+    <!-- Side navigation component -->
+    <app-side-nav></app-side-nav>
+
+    <!-- Main content area -->
+    <div class="flex-grow-1 d-flex justify-content-center align-items-center">
+        <!-- Glass-effect container for the control panel -->
+        <div class="main-container glass-effect d-flex flex-column gap-5 ps-5 pe-5 pt-4 pb-5 position-relative">
+            <!-- Loader for the section -->
+            <!-- Header section with icon and title -->
+            <h1 class="text-light fw-bold d-flex gap-3 align-items-center fs-3">
+                <!-- Control panel icon -->
+                <img src="../../../../../assets/Icons/control-panel-options.svg"
+                    alt="Green Sync - Control Panel Icon" />
+                <!-- Control panel title -->
+                <span>System Visuals</span>
+            </h1>
+            <ng-container *ngIf="!isLoading; else shimmerLoader">
+                <div class="images-cards-slider d-flex gap-3">
+                    @for(card of data; track card) {
+                        <div class="image-card bg-white bg-opacity-50 d-flex flex-column gap-2 p-2 rounded-4">
+                            <div class="image-container w-100">
+                                <img [src]="card.imageUrls[4]" [alt]="'Green Sync Image #' + card.aiImageId" loading="lazy" class="rounded w-100 h-100 object-fit-cover">
+                            </div>
+                            <span class="text-dark fs-5 fw-bold">{{card.results[4].detection || 'Can\'t Detect'}}</span>
+                            <div class="d-flex flex-column gap-1">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-dark fw-bold">Ripe Status: {{card.results[0].isRipe ? 'Ripe' : 'Not Ripe'}}</span>
+                                    <button matRipple [routerLink]="'/house-owner/image-profile/' + card.aiImageId" class="text-light border-0 bg-success rounded p-2 small">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </ng-container>
+            <ng-template #shimmerLoader>
+                <div class="images-cards-slider d-flex gap-3">
+                    <div *ngFor="let n of [1,2,3,4]" class="image-card bg-white bg-opacity-50 d-flex flex-column gap-2 p-2 rounded-4">
+                        <div class="image-container w-100 shimmer-loader rounded" style="height: 180px;"></div>
+                        <span class="shimmer-loader rounded" style="height: 24px; width: 80%;"></span>
+                        <div class="d-flex flex-column gap-1">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="shimmer-loader rounded" style="height: 18px; width: 60%;"></span>
+                                <span class="shimmer-loader rounded" style="height: 28px; width: 70px;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
 </div>

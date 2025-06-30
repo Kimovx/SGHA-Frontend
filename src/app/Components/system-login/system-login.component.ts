@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { HousesService } from '../../../Services/houses.service';
-import { LoginResponse } from '../../../Model View/LoginRespone,';
+import { LoginResponse } from '../../Model View/LoginRespone,';
 
 @Component({
   selector: 'app-system-login',

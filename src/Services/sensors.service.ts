@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Observable } from 'rxjs';
-import { SensoresReadings as SensorsReadings } from '../Model View/SensorsReadings';
+import { SensoresReadings as SensorsReadings } from '../app/Model View/SensorsReadings';
 
 @Injectable({
   providedIn: 'root'

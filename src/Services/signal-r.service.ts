@@ -19,6 +19,9 @@ export class SignalRService {
   
   private imagesUpdateSubject = new BehaviorSubject<any>(null);
   public imagesUpdate$ = this.imagesUpdateSubject.asObservable();
+  
+  private latestImageSubject = new BehaviorSubject<any>(null);
+  public latestImage$ = this.latestImageSubject.asObservable();
 
   constructor() { }
 
@@ -45,6 +48,11 @@ export class SignalRService {
     this.hubConnection.on('ReceiveImages', (data) => {
       console.log("📥 Received from SignalR:", data);
       this.imagesUpdateSubject.next(data);
+    });
+
+    this.hubConnection.on('ReceiveImageslatest', (data) => {
+      console.log("📥 Received from SignalR:", data);
+      this.latestImageSubject.next(data);
     });
 
     this.hubConnection

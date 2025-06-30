@@ -1,0 +1,141 @@
+<!-- <div class="container-fluid min-vh-100 min-vw-100 pt-2 pb-2 justify-content-center align-items-center">
+    <section class="glass-effect w-100 d-flex gap-5 p-3 flex-wrap">
+        @for(image of data; track image){
+        <div class="img-container d-flex">
+            <img [src]="image.url" [alt]="image.fileName" class="w-100 h-100 object-fit-cover rounded">
+        </div>
+        }
+    </section>
+</div> -->
+
+<div class="container-fluid flex-column flex-xl-row vh-100 vw-100 d-flex gap-5">
+    <!-- Side navigation component -->
+    <app-side-nav></app-side-nav>
+
+    <!-- Main content area -->
+    <div class="flex-grow-1 d-flex justify-content-center align-items-center">
+        <!-- Glass-effect container for the control panel -->
+        <div class="main-container glass-effect d-flex flex-column gap-5 ps-5 pe-5 pt-4 pb-5 position-relative">
+            <!-- Loader for the section -->
+            <!-- Header section with icon and title -->
+            <h1 class="text-light fw-bold d-flex gap-3 align-items-center fs-3">
+                <!-- Control panel icon -->
+                <img src="../../../../../assets/Icons/control-panel-options.svg"
+                    alt="Green Sync - Control Panel Icon" />
+                <!-- Control panel title -->
+                <span>Image Profile</span>
+            </h1>
+            @if(isLoading){
+            <!-- Shimmer loader -->
+            <div class="shimmer-loader rounded mb-4" style="height: 300px; width: 100%;">
+                <div class="shimmer"></div>
+            </div>
+            }
+            @else {
+            <div class="d-flex flex-column gap-2 align-items-center">
+                <!-- Carousel shown after loading -->
+                <ngb-carousel [interval]="2000" [pauseOnHover]="true" [wrap]="true" class="rounded-4">
+                    @for(image of imageData.imageUrls; track image; let i = $index) {
+                    <ng-template ngbSlide [id]="'slide-' + i" class="rounded-4">
+                        <img [src]="image" class="rounded-3 object-fit-cover cursor-pointer"
+                            (click)="openImageModal(image)" />
+                    </ng-template>
+                    }
+                </ngb-carousel>
+
+                <!-- Modal -->
+                <ng-template #imagePreview let-modal>
+                    <div
+                        class="modal-content border-0 rounded-4 overflow-hidden bg-dark shadow-lg animate__animated animate__zoomIn">
+                        <!-- Close button -->
+                        <div class="position-absolute top-0 end-0 m-3 z-2">
+                            <button type="button" class="btn btn-sm btn-light bg-opacity-10 border-0 rounded-circle"
+                                (click)="modal.dismiss()">
+                                <i class="bi bi-x-lg text-white fs-5"></i>
+                            </button>
+                        </div>
+
+                        <!-- Image content -->
+                        <div class="modal-body p-0 text-center">
+                            <img [src]="selectedImageUrl" class="img-fluid rounded-4"
+                                style="max-height: 90vh; max-width: 100%;" />
+                        </div>
+                    </div>
+                </ng-template>
+
+
+                <div class="table-responsive table-glass rounded-4 shadow-sm overflow-hidden">
+                    <table class="w-100 align-middle mb-0" style="border-collapse: separate; border-spacing: 0">
+                        <thead>
+                            <tr>
+                                <th class="fw-medium small text-uppercase text-white-50 px-3 py-2">Model</th>
+                                <th class="fw-medium small text-uppercase text-white-50 px-3 py-2">Detection</th>
+                                <th class="fw-medium small text-uppercase text-white-50 px-3 py-2">Is Ripe</th>
+                                <th class="fw-medium small text-uppercase text-white-50 px-3 py-2">Is Healthy</th>
+                                <th class="fw-medium small text-uppercase text-white-50 px-3 py-2">Is Pest</th>
+                                <th class="fw-medium small text-uppercase text-white-50 px-3 py-2">Action Needed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for(result of imageData.results; track result) {
+                            <tr class="border-top border-white-10">
+                                <td class="text-capitalize px-3 py-2 text-light">{{ result.model }}</td>
+                                <td class="px-3 py-2"><span class="text-white-50">{{ result.detection || '-' }}</span>
+                                </td>
+
+                                <td class="px-3 py-2">
+                                    @if(result.isRipe === true){
+                                    <span
+                                        class="badge rounded-pill bg-success bg-opacity-10 text-success px-3 py-2">Yes</span>
+                                    }
+                                    @else if(result.isRipe === false){
+                                    <span
+                                        class="badge rounded-pill bg-danger bg-opacity-10 text-danger px-3 py-2">No</span>
+                                    }
+                                    @else {
+                                    <span class="text-white-50">-</span>
+                                    }
+                                </td>
+
+                                <td class="px-3 py-2">
+                                    @if(result.isHealthy === true){
+                                    <span
+                                        class="badge rounded-pill bg-success bg-opacity-25 text-success px-3 py-2">Yes</span>
+                                    }
+                                    @else if(result.isHealthy === false){
+                                    <span
+                                        class="badge rounded-pill bg-danger bg-opacity-25 text-danger px-3 py-2">No</span>
+                                    }
+                                    @else {
+                                    <span class="text-white-50">-</span>
+                                    }
+                                </td>
+
+                                <td class="px-3 py-2">
+                                    @if(result.isPest === true){
+                                    <span
+                                        class="badge rounded-pill bg-danger bg-opacity-25 text-danger px-3 py-2">Yes</span>
+                                    }
+                                    @else if(result.isPest === false){
+                                    <span
+                                        class="badge rounded-pill bg-success bg-opacity-25 text-success px-3 py-2">No</span>
+                                    }
+                                    @else {
+                                    <span class="text-white-50">-</span>
+                                    }
+                                </td>
+
+                                <td class="px-3 py-2"><span class="text-light">{{ result.actionNeeded || '-' }}</span>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+            }
+        </div>
+    </div>
+</div>
